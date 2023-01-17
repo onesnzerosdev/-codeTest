@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\PostComent;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -18,6 +19,14 @@ class FrontendController extends Controller
     public function single_blog(Blog $blog)
     {
         # code...
-        return view('Frontend.single_blog', compact('blog'));
+        $comments = PostComent::where('post_id', $blog->id)->get();
+        return view('Frontend.single_blog', compact('blog', 'comments'));
+    }
+
+
+    public function commentStore(Request $request)
+    {
+        PostComent::create($request->all());
+        return back();
     }
 }

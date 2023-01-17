@@ -34,13 +34,36 @@
 
             </div>
         </div>
-
         <div class="row mt-2">
             <div class="col-6 offset-3">
-                <textarea name="comment" id="comment" class="form-control" placeholder="Comment" rows="4"></textarea>
-                <button class="btn btn-success mt-1">submit</button>
+                @foreach ($comments as $comment)
+                    <div class="card mt-1">
+                        <div class="card-header">
+                            {{ $comment->user->name }}
+                        </div>
+                        <div class="card-body">
+                            {{ $comment->comment }}
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
+        @if (Auth::check())
+            <div class="row mt-2">
+                <div class="col-6 offset-3">
+                    <form action="{{ route('blog.comment') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}" id="">
+                        <input type="hidden" name="post_id" value="{{ $blog->id }}">
+                        <textarea name="comment" id="comment" class="form-control" placeholder="Comment" rows="4"></textarea>
+                        <button class="btn btn-success mt-1">submit</button>
+                    </form>
+                </div>
+            </div>
+        @else
+        @endif
+
+
     </div>
 </body>
 

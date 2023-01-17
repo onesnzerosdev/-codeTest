@@ -27,3 +27,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontendController::class, 'index']);
 
 Route::get('/single-blog/{blog:slug}', [FrontendController::class, 'single_blog'])->name('singleblog');
+
+Route::post('comment-store', [FrontendController::class, 'commentStore'])->name('blog.comment');
