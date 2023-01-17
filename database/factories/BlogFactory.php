@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class BlogFactory extends Factory
 {
@@ -13,8 +15,13 @@ class BlogFactory extends Factory
      */
     public function definition()
     {
+        $id = rand(1, 300);
+        $image = 'https://picsum.photos/id/' . $id . '/700/600';
+        $title = $this->faker->sentence($nbWords = 5, $variableNbWords = true);
         return [
-            //
+            'title' => $title,
+            'slug' => Str::slug($title),
+            'description' => $this->faker->paragraph,
         ];
     }
 }

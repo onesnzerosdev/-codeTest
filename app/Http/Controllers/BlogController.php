@@ -15,7 +15,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return  view('Backend.Blog.index');
+        $blogs = Blog::latest('id')->get();
+        return  view('Backend.Blog.index', compact('blogs'));
     }
 
     /**
