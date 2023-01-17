@@ -27,9 +27,9 @@
                                 {{ $blog->title }}
                             </h5>
                             <p class="card-text">
-                                {{ Str::limit($blog->description, 120) }}
+                                {{ Str::limit($blog->description, 70) }}
                             </p>
-                            <a href="#" class="btn btn-primary">Details....</a>
+                            <a href="{{ route('singleblog', $blog->slug) }}" class="btn btn-primary">Details....</a>
                         </div>
                     </div>
                 </div>

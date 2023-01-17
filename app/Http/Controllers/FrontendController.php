@@ -13,4 +13,11 @@ class FrontendController extends Controller
         $blogs = Blog::latest('id')->get();
         return view('Frontend.index', compact('blogs'));
     }
+
+
+    public function single_blog(Blog $blog)
+    {
+        # code...
+        return view('Frontend.single_blog', compact('blog'));
+    }
 }
