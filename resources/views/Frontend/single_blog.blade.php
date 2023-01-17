@@ -14,7 +14,10 @@
 </head>
 
 <body>
+    @include('master.header')
     <div class="container">
+
+
         <div class="row mt-5">
             <div class="col-6 mt-2 offset-3">
                 <div class="card">

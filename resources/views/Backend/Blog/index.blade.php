@@ -33,6 +33,9 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">DataTable with default features</h3>
+                                <div class="float-right">
+                                    <a href="{{ route('blogs.create') }}" class="btn btn-success">Create</a>
+                                </div>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -56,7 +59,13 @@
                                                 <td>
 
                                                     <a href="" class="btn btn-success">Edit</a>
-                                                    <a href="" class="btn btn-danger">Delete</a>
+
+
+                                                    <form action="{{ route('blogs.destroy', $blog->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn bg-danger ">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 //     // Route::resource('blogs', BlogController::class);
 // });
 
-Route::get('/', [FrontendController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('frontend.index');
 
 Route::get('/single-blog/{blog:slug}', [FrontendController::class, 'single_blog'])->name('singleblog');
 

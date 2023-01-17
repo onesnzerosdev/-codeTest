@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Blog;
-use App\Http\Requests\StoreBlogRequest;
-use App\Http\Requests\UpdateBlogRequest;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -16,8 +17,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::latest('id')->get();
-        return  view('Backend.Blog.index', compact('blogs'));
+        $posts = Blog::all();
+        return PostResource::collection($posts);
     }
 
     /**
@@ -27,30 +28,29 @@ class BlogController extends Controller
      */
     public function create()
     {
-        return view('Backend.Blog.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreBlogRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        // return $request;
+        $posts = Blog::create($request->all());
 
-        Blog::create($request->all());
-        return back();
+        return new PostResource($posts);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Blog  $blog
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blog)
+    public function show(Blog $post)
     {
         //
     }
@@ -58,10 +58,10 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Blog  $blog
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Blog $post)
     {
         //
     }
@@ -69,24 +69,27 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateBlogRequest  $request
-     * @param  \App\Models\Blog  $blog
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateBlogRequest $request, Blog $blog)
+    public function update(StorePostRequest $request, Blog $post)
     {
-        //
+        $post->update($request->all());
+
+        return new PostResource($post);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Blog  $blog
+     * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Blog $post)
     {
-        $blog->delete();
-        return back();
+        $post->delete();
+
+        return response(null, 204);
     }
 }

@@ -66,6 +66,15 @@
                         </p>
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('frontend.index') }}" class="nav-link active">
+                        <i class="nav-icon fas fa-blog"></i>
+                        <p>
+                            Website
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
